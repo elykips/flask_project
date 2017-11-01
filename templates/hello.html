@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hello, {{name}}</title>
+</head>
+<body>
+	{% if name == 'ely' %}
+		{% for _ in range(number) %}
+			you are beautiful, {{name}} <br/>
+		{% endfor %}
+	{% else %}
+	You are not beautiful, {{name}}
+	{% endif %}
+</body>
+</html>
