@@ -35,12 +35,28 @@ def logout():
 # 		session['is_loggedin']= password =='bananaPie'
 # 	return render_template("secret.html", my_session=session['is_loggedin'])
 
+@app.route('/register', methods=['POST','GET'])
+def process_registration():
+	if request.method == 'POST':
+		fname = request.form.get('fname')
+		lname = request.form.get('lname')
+		gender = request.form.get('gender')
+		edu_level = request.form.get('edu_level')
+		phone = request.form.get('phone')
+		username = request.form.get('username')
+		email = request.form.get('email')
+		password = request.form.get('password')
+		return render_template("profile.html",fname=fname, lname=lname, gender=gender, edu_level=edu_level, phone=phone,email=email, username=username)
+	return render_template("register.html")
+
+	
 @app.route('/login', methods=['POST','GET'])
 def process_login():
 	if request.method == 'POST':
 		password = request.form.get('pass')
-		if password == 'slayqueen':
-			return render_template("success.html", password=password)
+		username = request.form.get('username')
+		if username == 'elykips' and password == 'elykips+254':
+			return render_template("success.html", username=username, password=password)
 		else:
 			return render_template("login.html")
 
@@ -52,6 +68,10 @@ def check_session():
 		return redirect("https://yahoo.com")
 	else:
 		return render_template("session.html", my_session=session['is_loggedin'])
+
+@app.route('/table/<int:rows>/<int:columns>', methods=['GET'])
+def generate_table(rows, columns):
+	return render_template("table.html", columns=columns,rows=rows)
 
 
 
